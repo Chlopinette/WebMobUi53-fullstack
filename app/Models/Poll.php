@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Auth;
 
 class Poll extends Model
 {
@@ -44,5 +46,10 @@ class Poll extends Model
     public function votes(): HasMany
     {
         return $this->hasMany(PollVote::class);
+    }
+
+    public function myVote(): HasOne
+    {
+        return $this->hasOne(PollVote::class)->where('user_id', Auth::id());
     }
 }

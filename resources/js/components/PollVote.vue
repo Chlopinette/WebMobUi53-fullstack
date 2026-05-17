@@ -211,6 +211,19 @@
         </div>
       </div>
 
+      <!-- Share Link -->
+      <div class="text-center pb-6">
+        <p class="text-black/50 font-bold uppercase text-xs mb-2">
+          Partage ce sondage !
+        </p>
+        <div class="flex justify-center">
+          <input type="text" :value="pollUrl" readonly class="p-2 border-2 border-black text-center text-sm">
+          <button @click="copyToClipboard(pollUrl)" class="bg-black text-white px-4 py-2 text-sm font-bold uppercase">
+            Copier
+          </button>
+        </div>
+      </div>
+
       <!-- Footer -->
       <div class="text-center pb-6">
         <p class="text-black/50 font-bold uppercase text-xs">
@@ -247,6 +260,7 @@ const optionColors = ['bg-pink-400', 'bg-cyan-400', 'bg-orange-400', 'bg-lime-40
 const barColors = ['bg-pink-400', 'bg-cyan-400', 'bg-orange-400', 'bg-lime-400', 'bg-violet-400'];
 
 const token = window.location.pathname.split('/').pop();
+const pollUrl = window.location.href;
 
 const isExpired = computed(() => poll.value?.is_expired ?? false);
 
@@ -369,6 +383,14 @@ function updateChart() {
         },
       },
     },
+  });
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Link copied to clipboard!');
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
   });
 }
 
