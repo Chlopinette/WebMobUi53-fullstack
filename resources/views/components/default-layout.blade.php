@@ -21,64 +21,57 @@
     @endisset
 </head>
 
-<body class="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-900">
-    <header class="bg-teal-600 text-white dark:bg-slate-800">
+<body class="flex min-h-screen flex-col bg-yellow-300 text-black font-sans">
+    <header class="bg-white border-b-4 border-black">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="h-16 flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <a href="{{ url('/') }}" class="block hover:opacity-80 transition">
+            <div class="h-20 flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <a href="{{ url('/') }}" class="text-3xl font-black uppercase tracking-tighter">
                         {{ config('app.name') }}
-                    </a>
-                    <a href="{{ url('/posts') }}"
-                        class="block bg-teal-700 dark:bg-purple-900 px-3 py-1 rounded-md hover:bg-teal-800 dark:hover:bg-purple-800">
-                        {{ __('ui.posts.index.title') }}
                     </a>
                 </div>
 
-                @auth
-                    <div class="flex items-center gap-4">
-                        <a href="{{ route('polls.dashboard') }}" class="block hover:opacity-80 transition">
-                            Polls
-                        </a>
+                <div class="flex items-center gap-4">
+                    @auth
+                        <a href="{{ url('/posts') }}" class="font-bold uppercase hover:text-pink-500">Posts</a>
+                        <a href="{{ route('polls.dashboard') }}" class="font-bold uppercase hover:text-pink-500">Sondages</a>
                         <a href="{{ url('/my-profile') }}" class="block hover:opacity-80 transition">
                             <div
-                                class="h-8 w-8 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                class="h-10 w-10 rounded-full overflow-hidden border-2 border-black bg-gray-200 flex items-center justify-center">
                                 @if (Auth::user()->profile_picture)
                                     <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}"
                                         alt="{{ Auth::user()->username }}" class="w-full h-full object-cover">
                                 @else
-                                    <img src="/icons/profile.svg" alt="{{ Auth::user()->username }}" class="h-8 w-8">
+                                    <img src="/icons/profile.svg" alt="{{ Auth::user()->username }}" class="h-10 w-10">
                                 @endif
                             </div>
                         </a>
-                    </div>
-                @else
-                    <div class="flex items-center gap-2">
+                    @else
                         <a href="{{ url('/auth/login') }}"
-                            class="block px-3 py-1 rounded-md hover:bg-teal-700 dark:hover:bg-slate-700 transition">
+                            class="font-bold uppercase hover:text-pink-500">
                             {{ __('ui.auth.login.title') }}
                         </a>
                         <a href="{{ url('/auth/register') }}"
-                            class="block bg-teal-700 dark:bg-purple-900 px-3 py-1 rounded-md hover:bg-teal-800 dark:hover:bg-purple-800 transition">
+                            class="px-4 py-2 bg-pink-400 text-black font-black uppercase border-2 border-black shadow-[2px_2px_0px_black] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
                             {{ __('ui.auth.register.title') }}
                         </a>
-                    </div>
-                @endauth
+                    @endauth
+                </div>
             </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-grow dark:text-white max-w-2xl">
+    <main class="container mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-grow max-w-4xl">
         {{ $slot }}
     </main>
 
-    <footer class="bg-teal-600 text-white text-sm dark:bg-slate-800">
+    <footer class="bg-white border-t-4 border-black text-sm">
         <div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <div class="h-16 flex flex-col items-center justify-between gap-4 sm:flex-row">
-                <p class="text-center sm:text-left">
+            <div class="flex items-center justify-between">
+                <p class="font-bold">
                     {{ __('ui.about.copyright', ['year' => date('Y')]) }}
                 </p>
-                <a href="{{ url('/about') }}" class="block hover:opacity-80 transition">
+                <a href="{{ url('/about') }}" class="font-bold uppercase hover:text-pink-500">
                     {{ __('ui.about.title') }}
                 </a>
             </div>

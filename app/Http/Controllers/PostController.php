@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->with('user')->with('likes')->get();
+        $posts = Post::orderBy('created_at', 'desc')->with('user')->with('likes')->paginate(9);
 
         return view('posts.index', ['posts' => $posts]);
     }
@@ -60,12 +60,9 @@ class PostController extends Controller
         $reaction = null;
 
         if ($user) {
-            $reaction = $post->likes()->where('user_id', $user->id)->first();
-
-            // Vérifie si la personne a déjà liké ce post
-            if ($reaction) {
-                // Récupère la réaction au post
-                $reaction = $reaction->pivot->reaction;
+            $like = $post->likes()->where('user_id', $user->id)->first();
+            if ($like) {
+                $reaction = $like->pivot->reaction;
             }
         }
 

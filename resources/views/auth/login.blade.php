@@ -1,76 +1,68 @@
 <x-default-layout>
     <x-slot:title>
-        {{ __('ui.auth.login.title') }}
+        Connexion
     </x-slot>
 
-    <x-slot:description>
-        {{ __('ui.auth.login.description', ['app_name' => config('app.name')]) }}
-    </x-slot>
-
-    <article class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 max-w-md mx-auto">
-        <header class="mb-6">
-            <h1 class="text-3xl font-bold dark:text-white mb-2">
-                {{ __('ui.auth.login.title') }}
+    <div class="max-w-md mx-auto bg-white border-4 border-black p-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-black uppercase">
+                Connexion
             </h1>
-
-            <p class="mt-4 dark:text-gray-300">
-                {{ __('ui.auth.login.description', ['app_name' => config('app.name')]) }}
+            <p class="mt-2 text-black/70 font-bold">
+                Heureux de vous revoir !
             </p>
         </header>
 
         <form method="POST" action="{{ url('/auth/login') }}">
             @csrf
 
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {{ __('ui.auth.login.form.fields.email.label') }}
+            <div class="mb-6">
+                <label for="email" class="block text-lg font-black uppercase mb-2">
+                    Adresse Email
                 </label>
                 <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                    placeholder="{{ __('ui.auth.login.form.fields.email.placeholder') }}"
-                    class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:border-transparent @error('email') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
+                    placeholder="vous@exemple.com"
+                    class="w-full p-4 border-4 border-black text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-300 @error('email') ring-4 ring-red-500 @enderror">
                 @error('email')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-4">
-                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {{ __('ui.auth.login.form.fields.password.label') }}
-                </label>
-                <input id="password" type="password" name="password" required
-                    placeholder="{{ __('ui.auth.login.form.fields.password.placeholder') }}"
-                    class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:border-transparent @error('password') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
-                @error('password')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    <p class="mt-2 text-red-600 font-bold">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-6">
+                <label for="password" class="block text-lg font-black uppercase mb-2">
+                    Mot de passe
+                </label>
+                <input id="password" type="password" name="password" required
+                    placeholder="Votre mot de passe"
+                    class="w-full p-4 border-4 border-black text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-300 @error('password') ring-4 ring-red-500 @enderror">
+                @error('password')
+                    <p class="mt-2 text-red-600 font-bold">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-8">
                 <label class="flex items-center">
                     <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}
-                        class="rounded border-gray-300 dark:border-gray-600 text-teal-600 dark:text-purple-500 focus:ring-teal-500 dark:focus:ring-purple-500">
-                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">
-                        {{ __('ui.auth.login.form.fields.remember.label') }}
+                        class="h-6 w-6 border-4 border-black accent-pink-400">
+                    <span class="ml-3 text-lg font-bold uppercase">
+                        Se souvenir de moi
                     </span>
                 </label>
             </div>
 
-            <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex flex-col gap-4">
-                    <button type="submit"
-                        class="w-full px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800 cursor-pointer">
-                        {{ __('ui.auth.login.form.actions.submit') }}
-                    </button>
+            <footer class="flex flex-col gap-4">
+                <button type="submit"
+                    class="w-full px-6 py-4 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                    Se connecter
+                </button>
 
-                    <p class="text-center text-sm text-gray-600 dark:text-gray-400">
-                        {{ __('ui.auth.login.no_account') }}
-                        <a href="{{ url('/auth/register') }}"
-                            class="text-teal-600 dark:text-purple-400 hover:underline">
-                            {{ __('ui.auth.login.register') }}
-                        </a>
-                    </p>
-                </div>
+                <p class="text-center font-bold">
+                    Pas encore de compte ?
+                    <a href="{{ url('/auth/register') }}" class="text-pink-500 hover:underline">
+                        Inscrivez-vous
+                    </a>
+                </p>
             </footer>
         </form>
-    </article>
+    </div>
 </x-default-layout>

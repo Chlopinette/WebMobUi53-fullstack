@@ -1,32 +1,31 @@
 <x-default-layout>
     <x-slot:title>
-        {{ __('ui.home.title') }}
+        Accueil
     </x-slot>
 
-    <x-slot:description>
-        {{ __('ui.home.description') }}
-    </x-slot>
+    <div class="text-center mb-12">
+        <h1 class="text-6xl font-black text-black uppercase leading-none tracking-tighter">
+            Le Blog de la Communauté
+        </h1>
+        <p class="mt-4 text-xl font-bold text-black/70">
+            Partagez vos idées, découvrez de nouvelles perspectives.
+        </p>
+    </div>
 
-    <h1 class="text-2xl font-bold dark:text-white">
-        {{ config('app.name') }}
-    </h1>
-
-    <p class="mt-4 dark:text-gray-300">
-        {{ __('ui.home.introduction', ['app_name' => config('app.name')]) }}
-    </p>
-
-    <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-8">
-        {{ __('ui.home.recent_posts') }}
+    <h2 class="text-center text-3xl font-black text-black uppercase mb-8">
+        Derniers Articles
     </h2>
 
-    <div class="mt-8 space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach ($posts as $post)
             <x-post-card :post="$post" />
         @endforeach
     </div>
 
-    <a href="{{ url('/posts') }}"
-        class="mt-6 block w-full px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800 text-center">
-        {{ __('ui.home.see_all_posts') }}
-    </a>
+    <div class="text-center mt-12">
+        <a href="{{ url('/posts') }}"
+            class="inline-block px-8 py-4 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[6px_6px_0px_black] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all">
+            Voir tous les articles
+        </a>
+    </div>
 </x-default-layout>

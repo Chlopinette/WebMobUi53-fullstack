@@ -1,62 +1,55 @@
 <x-default-layout>
     <x-slot:title>
-        {{ __('ui.posts.create.title') }}
+        Écrire un nouvel article
     </x-slot>
 
-    <x-slot:description>
-        {{ __('ui.posts.create.description', ['app_name' => config('app.name')]) }}
-    </x-slot>
-
-    <article class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
-        <header class="mb-6">
-            <h1 class="text-3xl font-bold dark:text-white mb-2">
-                {{ __('ui.posts.create.title') }}
+    <div class="bg-white border-4 border-black p-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-black uppercase">
+                Nouvel Article
             </h1>
-
-            <p class="mt-4 dark:text-gray-300">
-                {{ __('ui.posts.create.description', ['app_name' => config('app.name')]) }}
+            <p class="mt-2 text-black/70 font-bold">
+                Partagez vos pensées avec la communauté.
             </p>
         </header>
 
         <form method="POST" action="{{ url('/posts') }}">
             @csrf
 
-            <div class="mb-4">
-                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {{ __('ui.posts.form.fields.title.label') }}
+            <div class="mb-6">
+                <label for="title" class="block text-lg font-black uppercase mb-2">
+                    Titre de l'article
                 </label>
                 <input id="title" type="text" name="title" value="{{ old('title') }}"
-                    placeholder="{{ __('ui.posts.form.fields.title.placeholder') }}"
-                    class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:border-transparent @error('title') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">
+                    placeholder="Un titre accrocheur..."
+                    class="w-full p-4 border-4 border-black text-lg font-bold focus:outline-none focus:ring-4 focus:ring-yellow-300 @error('title') ring-4 ring-red-500 @enderror">
                 @error('title')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    <p class="mt-2 text-red-600 font-bold">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div class="mb-6">
-                <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    {{ __('ui.posts.form.fields.content.label') }}
+            <div class="mb-8">
+                <label for="content" class="block text-lg font-black uppercase mb-2">
+                    Contenu
                 </label>
-                <textarea id="content" name="content" rows="5"
-                    placeholder="{{ __('ui.posts.form.fields.content.placeholder') }}"
-                    class="w-full px-3 py-2 border rounded-md bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:border-transparent @error('content') border-red-500 focus:ring-red-500 @else border-gray-300 dark:border-gray-600 focus:ring-teal-500 dark:focus:ring-purple-500 @enderror">{{ old('content') }}</textarea>
+                <textarea id="content" name="content" rows="10"
+                    placeholder="Écrivez votre histoire ici..."
+                    class="w-full p-4 border-4 border-black font-serif text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 @error('content') ring-4 ring-red-500 @enderror">{{ old('content') }}</textarea>
                 @error('content')
-                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    <p class="mt-2 text-red-600 font-bold">{{ $message }}</p>
                 @enderror
             </div>
 
-            <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex items-center justify-between">
-                    <a href="{{ url('/posts') }}"
-                        class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">
-                        {{ __('ui.posts.form.actions.cancel') }}
-                    </a>
-                    <button type="submit"
-                        class="px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800 cursor-pointer">
-                        {{ __('ui.posts.form.actions.submit') }}
-                    </button>
-                </div>
+            <footer class="flex items-center justify-end gap-4">
+                <a href="{{ url('/posts') }}"
+                    class="px-6 py-3 bg-gray-200 text-black font-black uppercase border-4 border-black">
+                    Annuler
+                </a>
+                <button type="submit"
+                    class="px-6 py-3 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                    Publier l'article
+                </button>
             </footer>
         </form>
-    </article>
+    </div>
 </x-default-layout>

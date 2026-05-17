@@ -1,133 +1,95 @@
 <x-default-layout>
     <x-slot:title>
-        @if ($post->title)
-            {{ __('ui.posts.show.title', [
-                'post_title' => $post->title,
-                'first_name' => $post->user->first_name,
-                'last_name' => $post->user->last_name,
-            ]) }}
-        @else
-            {{ __('ui.posts.show.title_without_post_title', [
-                'first_name' => $post->user->first_name,
-                'last_name' => $post->user->last_name,
-            ]) }}
-        @endif
+        {{ $post->title ?? 'Article' }}
     </x-slot>
 
-    <x-slot:description>
-        @if ($post->title)
-            {{ __('ui.posts.show.description', [
-                'post_title' => $post->title,
-                'first_name' => $post->user->first_name,
-                'last_name' => $post->user->last_name,
-            ]) }}
-        @else
-            {{ __('ui.posts.show.description_without_post_title', [
-                'first_name' => $post->user->first_name,
-                'last_name' => $post->user->last_name,
-            ]) }}
-        @endif
-    </x-slot>
-
-    <article class="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6">
-        <header class="mb-6">
+    <article class="bg-white border-4 border-black">
+        <header class="p-8 border-b-4 border-black">
             @if ($post->title)
-                <h1 class="text-3xl font-bold dark:text-white mb-2">
+                <h1 class="text-5xl font-black uppercase leading-tight tracking-tight mb-4">
                     {{ $post->title }}
                 </h1>
             @endif
 
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-                <a href="{{ url('@' . $post->user->username) }}">
-                    {{ __('ui.posts.show.author', [
-                        'first_name' => $post->user->first_name,
-                        'last_name' => $post->user->last_name,
-                    ]) }}
+            <div class="flex items-center gap-4">
+                <a href="{{ url('@' . $post->user->username) }}" class="block">
+                    <div
+                        class="h-14 w-14 rounded-full overflow-hidden border-2 border-black bg-gray-200 flex items-center justify-center">
+                        @if ($post->user->profile_picture)
+                            <img src="{{ asset('storage/' . $post->user->profile_picture) }}"
+                                alt="{{ $post->user->username }}" class="w-full h-full object-cover">
+                        @else
+                             <span class="text-xl font-black">{{ strtoupper(substr($post->user->first_name, 0, 1) . substr($post->user->last_name, 0, 1)) }}</span>
+                        @endif
+                    </div>
                 </a>
-                ·
-                <span title="{{ $post->created_at->isoFormat('LLLL') }}">
-                    {{ $post->created_at->diffForHumans() }}
-                </span>
-                @can('update', $post)
-                    ·
-                    <a href="{{ url('/posts/' . $post->id . '/edit') }}">
-                        {{ __('ui.posts.edit.title_without_post_title') }}
+                <div>
+                    <a href="{{ url('@' . $post->user->username) }}" class="hover:underline">
+                        <p class="font-black text-xl">
+                            {{ $post->user->first_name }} {{ $post->user->last_name }}
+                        </p>
                     </a>
-                @endcan
-                ·
-                <span class="font-semibold">
-                    {{ trans_choice('ui.posts.likes_count', count($post->likes)) }}
-                </span>
-            </p>
+                    <p class="text-sm text-black/60 font-bold" title="{{ $post->created_at->isoFormat('LLLL') }}">
+                        Publié {{ $post->created_at->diffForHumans() }}
+                    </p>
+                </div>
+            </div>
         </header>
 
-        <div class="mb-4">
-            <p class="mt-4 dark:text-gray-300">
-                {{ $post->content }}
-            </p>
+        <div class="p-8 text-lg prose prose-lg max-w-none prose-p:font-serif prose-p:text-black/80 prose-headings:font-black prose-headings:uppercase">
+            {!! nl2br(e($post->content)) !!}
         </div>
 
-        <footer class="pt-4 border-t border-gray-200 dark:border-gray-700">
+        <footer class="p-8 border-t-4 border-black bg-yellow-300">
             @auth
-                <form method="POST" action="{{ url('/likes/' . $post->id) }}" class="mb-4">
-                    @csrf
-                    @method('PUT')
-                    <div class="flex flex-wrap justify-between gap-2">
-                        <button type="submit" name="reaction" value="like"
-                            class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'like' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
-                            👍
-                        </button>
-                        <button type="submit" name="reaction" value="love"
-                            class="w-12 h-12 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 {{ $reaction === 'love' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
-                            ❤️
-                        </button>
-                        <button type="submit" name="reaction" value="haha"
-                            class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'haha' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
-                            😂
-                        </button>
-                        <button type="submit" name="reaction" value="wow"
-                            class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'wow' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
-                            😮
-                        </button>
-                        <button type="submit" name="reaction" value="sad"
-                            class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'sad' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
-                            😢
-                        </button>
-                        <button type="submit" name="reaction" value="angry"
-                            class="w-12 h-12 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer {{ $reaction === 'angry' ? 'ring-2 ring-teal-600 dark:ring-purple-900' : '' }}">
-                            😡
-                        </button>
-                    </div>
-                </form>
+                <div class="mb-6">
+                    <h3 class="text-xl font-black uppercase mb-3">Votre réaction</h3>
+                    <form method="POST" action="{{ url('/likes/' . $post->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="flex flex-wrap gap-3">
+                            @php
+                                $reactions = ['like' => '👍', 'love' => '❤️', 'haha' => '😂', 'wow' => '😮', 'sad' => '😢', 'angry' => '😡'];
+                            @endphp
+                            @foreach ($reactions as $key => $emoji)
+                                <button type="submit" name="reaction" value="{{ $key }}"
+                                    class="text-3xl p-2 rounded-lg transition-transform hover:scale-125 {{ $reaction === $key ? 'ring-4 ring-black' : '' }}">
+                                    {{ $emoji }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </form>
+                </div>
             @endauth
-            <ul class="flex flex-wrap gap-2">
-                @forelse ($post->likes as $user)
-                    <li class="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
-                        <a href="{{ url('@' . $user->username) }}" class="font-semibold hover:underline">
-                            {{ '@' . $user->username }}
-                        </a>
-                        <span>
-                            @if ($user->pivot->reaction === 'like')
-                                👍
-                            @elseif($user->pivot->reaction === 'love')
-                                ❤️
-                            @elseif($user->pivot->reaction === 'haha')
-                                😂
-                            @elseif($user->pivot->reaction === 'wow')
-                                😮
-                            @elseif($user->pivot->reaction === 'sad')
-                                😢
-                            @elseif($user->pivot->reaction === 'angry')
-                                😡
-                            @endif
-                        </span>
-                    </li>
-                @empty
-                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ trans_choice('ui.posts.likes_count', 0) }}
-                    </span>
-                @endforelse
-            </ul>
+
+            <div>
+                <h3 class="text-xl font-black uppercase mb-4">
+                    {{ trans_choice('ui.posts.likes_count', count($post->likes)) }}
+                </h3>
+                <ul class="flex flex-wrap gap-4">
+                    @forelse ($post->likes as $user)
+                        <li class="flex items-center gap-2 text-sm font-bold">
+                            <a href="{{ url('@' . $user->username) }}" class="flex items-center gap-2 hover:underline">
+                                <div class="h-8 w-8 rounded-full overflow-hidden border-2 border-black bg-gray-200">
+                                     @if ($user->profile_picture)
+                                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="{{ $user->username }}" class="w-full h-full object-cover">
+                                    @else
+                                        <span class="text-xs font-black flex items-center justify-center w-full h-full">{{ strtoupper(substr($user->first_name, 0, 1) . substr($user->last_name, 0, 1)) }}</span>
+                                    @endif
+                                </div>
+                                <span>{{ '@' . $user->username }}</span>
+                            </a>
+                            <span class="text-xl">
+                                {{ $reactions[$user->pivot->reaction] ?? '' }}
+                            </span>
+                        </li>
+                    @empty
+                        <li class="text-black/60 font-bold">
+                            Soyez le premier à réagir !
+                        </li>
+                    @endforelse
+                </ul>
+            </div>
         </footer>
     </article>
 </x-default-layout>

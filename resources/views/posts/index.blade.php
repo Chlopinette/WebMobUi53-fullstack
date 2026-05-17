@@ -1,30 +1,27 @@
 <x-default-layout>
     <x-slot:title>
-        {{ __('ui.posts.index.title') }}
+        Tous les articles
     </x-slot>
 
-    <x-slot:description>
-        {{ __('ui.posts.index.description', ['app_name' => config('app.name')]) }}
-    </x-slot>
+    <div class="flex justify-between items-center mb-12">
+        <h1 class="text-5xl font-black text-black uppercase leading-none tracking-tighter">
+            Tous les Articles
+        </h1>
+        @can('create', App\Models\Post::class)
+            <a href="{{ url('/posts/create') }}"
+                class="px-6 py-3 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                Écrire un article
+            </a>
+        @endcan
+    </div>
 
-    <h1 class="text-2xl font-bold dark:text-white">
-        {{ __('ui.posts.index.title') }}
-    </h1>
-
-    <p class="mt-4 dark:text-gray-300">
-        {{ __('ui.posts.index.description', ['app_name' => config('app.name')]) }}
-    </p>
-
-    @can('create', App\Models\Post::class)
-        <a href="{{ url('/posts/create') }}"
-            class="mt-6 block w-full px-4 py-2 bg-teal-600 dark:bg-purple-900 text-white rounded-md hover:bg-teal-700 dark:hover:bg-purple-800 text-center">
-            {{ __('ui.posts.create.title') }}
-        </a>
-    @endcan
-
-    <div class="mt-8 space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach ($posts as $post)
             <x-post-card :post="$post" />
         @endforeach
+    </div>
+
+    <div class="mt-12">
+        {{ $posts->links() }}
     </div>
 </x-default-layout>

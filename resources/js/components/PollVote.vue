@@ -1,8 +1,8 @@
 <template>
-  <div class="min-h-screen bg-yellow-300 font-black p-4">
+  <div class="font-black p-4">
 
     <!-- Loading -->
-    <div v-if="loading" class="flex items-center justify-center min-h-screen">
+    <div v-if="loading" class="flex items-center justify-center">
       <p class="text-2xl font-black uppercase">Chargement... ⚡</p>
     </div>
 
@@ -23,13 +23,6 @@
 
     <!-- Sondage disponible -->
     <div v-else-if="poll" class="max-w-2xl mx-auto">
-
-      <!-- Header -->
-      <div class="text-center mb-8 pt-6">
-        <h1 class="text-5xl font-black text-black uppercase leading-none tracking-tighter">
-          ⚡ SONDAPÉROOO
-        </h1>
-      </div>
 
       <!-- Card principale -->
       <div class="bg-white border-4 border-black shadow-[8px_8px_0px_black] p-6 mb-6">
@@ -222,13 +215,6 @@
             Copier
           </button>
         </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="text-center pb-6">
-        <p class="text-black/50 font-bold uppercase text-xs">
-          ⚡ SONDAPÉROOO — VOTE. DÉBATS. RÉPÈTE.
-        </p>
       </div>
 
     </div>
