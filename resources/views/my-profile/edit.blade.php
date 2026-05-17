@@ -3,9 +3,9 @@
         Modifier mon profil
     </x-slot>
 
-    <div class="max-w-2xl mx-auto bg-white border-4 border-black p-8">
+    <div class="max-w-2xl mx-auto bg-white border-4 border-black p-4 md:p-8">
         <header class="mb-8 text-center">
-            <h1 class="text-4xl font-black uppercase">
+            <h1 class="text-3xl md:text-4xl font-black uppercase">
                 Modifier mon profil
             </h1>
             <p class="mt-2 text-black/70 font-bold">
@@ -33,7 +33,7 @@
                 @enderror
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="mb-6">
                     <label for="first_name" class="block text-lg font-black uppercase mb-2">
                         Prénom
@@ -78,14 +78,14 @@
                 @enderror
             </div>
 
-            <footer class="flex items-center justify-between">
+            <footer class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <a href="{{ url('/my-profile') }}"
-                    class="px-6 py-3 bg-gray-200 text-black font-black uppercase border-4 border-black">
+                    class="w-full md:w-auto px-6 py-3 bg-gray-200 text-black font-black uppercase border-4 border-black text-center">
                     Annuler
                 </a>
                 <button type="submit"
-                    class="px-6 py-3 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
-                    Enregistrer les modifications
+                    class="w-full md:w-auto px-6 py-3 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                    Enregistrer
                 </button>
             </footer>
         </form>

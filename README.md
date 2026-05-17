@@ -1,77 +1,128 @@
-# HEIG-VD DévProdMéd Course - Mini-projet
+# Application de Sondage et de Blog
 
-Ce dépôt contient le mini-projet à réaliser dans le cadre du cours
-_"[Développement de produit média (DévProdMéd)](https://github.com/heig-vd-devprodmed-course/heig-vd-devprodmed-course)"_
-enseigné à la
-[Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud (HEIG-VD)](https://heig-vd.ch),
-Suisse.
+Ce projet est une application web complète développée avec Laravel et Vue.js. Elle permet aux utilisateurs de créer et gérer des sondages, de voter, ainsi que de lire et publier des articles de blog.
 
-## Objectif du mini-projet
+## Fonctionnalités
 
-L'objectif de ce mini-projet est de créer un réseau social simple en utilisant le
-framework [Laravel](https://laravel.com/). Ce projet permettra de mettre en pratique les concepts
-appris dans le cours.
+- **Gestion des Sondages**
+  - Création, modification et suppression de sondages.
+  - Configuration des options : choix unique ou multiple, visibilité des résultats.
+  - Partage facile des sondages via un lien unique.
+  - Vote en temps réel avec mise à jour des résultats par polling.
+  - Affichage graphique des résultats.
 
-## Pré-requis
+- **Système de Blog**
+  - Création et publication d'articles.
+  - Consultation des articles avec un système de réactions.
 
-Afin de lancer ce projet, une stack compatible avec Laravel, est requise.
+- **Authentification**
+  - Inscription et connexion des utilisateurs.
+  - Gestion de profil utilisateur avec photo.
 
-Voici les pré-requis nécessaires :
+## Stack Technique
 
-- PHP >= 8.0.
-- Composer.
-- Node.js et npm.
-- Une base de données (MySQL, PostgreSQL, SQLite, etc.).
-- Un serveur web (Apache, Nginx, etc.).
+- **Backend**: Laravel 12
+- **Frontend**: Vue.js 3
+- **Base de données**: SQLite, MySQL, ou PostgreSQL
+- **Styling**: Tailwind CSS
+- **Build Tool**: Vite
 
-[Laravel Herd](https://helm.sh/docs/charts/laravel/) est recommandé pour une installation facile de Laravel et de ses dépendances.
+---
 
-## Développement local
+## Prérequis
 
-Pour développer et tester le mini-projet en local, voici les étapes à suivre :
+Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votre machine :
 
-1. Forker ce dépôt
+- PHP >= 8.2
+- Composer
+- Node.js >= 18.x
+- npm (ou yarn)
+- Une base de données (ex: MySQL, PostgreSQL, ou SQLite)
 
-2. Installer les dépendances avec npm et Composer :
+---
 
-    ```bash
-    npm install && npm run build
+## Installation
 
-    composer install
-    ```
+Suivez ces étapes pour installer et lancer le projet en local.
 
-3. Copier le fichier `.env.example` en `.env`.
-4. Modifier les variables d'environnement si nécessaire (optionnel).
-5. Générer la clé d'application Laravel :
+### 1. Cloner le Dépôt
 
-    ```bash
-    php artisan key:generate
-    ```
+```bash
+git clone https://github.com/votre-username/votre-repo.git
+cd votre-repo
+```
 
-6. Créer le lien symbolique pour les fichiers téléversés :
+### 2. Installer les Dépendances Backend
 
-    ```bash
-    php artisan storage:link
-    ```
+```bash
+composer install
+```
 
-7. Créer la base de données et exécuter les migrations :
+### 3. Installer les Dépendances Frontend
 
-    ```bash
-    php artisan migrate
-    ```
+```bash
+npm install
+```
 
-    S'il est nécessaire de réinitialiser la base de données, utiliser la commande `php artisan migrate:reset` puis `php artisan migrate` à nouveau.
+### 4. Configurer l'Environnement
 
-8. Optionnel : en mode développement, il est possible de peupler la base de données avec des données fictives :
+Copiez le fichier d'environnement d'exemple et configurez vos variables.
 
-    ```bash
-    php artisan db:seed
-    ```
+```bash
+cp .env.example .env
+```
 
-9. Démarrer le serveur de développement Laravel :
+Ouvrez le fichier `.env` et configurez les informations de votre base de données (`DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
 
-    ```bash
-    composer run dev
-    ```
+**Exemple pour SQLite :**
+Créez un fichier `database.sqlite` dans le dossier `database/` puis mettez à jour votre `.env` :
 
-L'application sera accessible à l'adresse <http://127.0.0.1:8000>.
+```
+DB_CONNECTION=sqlite
+DB_DATABASE=/path/to/your/project/database/database.sqlite
+```
+
+### 5. Générer la Clé d'Application
+
+```bash
+php artisan key:generate
+```
+
+### 6. Lancer les Migrations
+
+Cette commande créera toutes les tables nécessaires dans votre base de données.
+
+```bash
+php artisan migrate
+```
+
+### 7. Compiler les Assets Frontend
+
+Cette commande va compiler les fichiers JavaScript et CSS. Laissez-la tourner dans un terminal pendant que vous développez.
+
+```bash
+npm run dev
+```
+
+### 8. Lancer le Serveur de Développement
+
+Ouvrez un **nouveau terminal** et lancez le serveur Laravel.
+
+```bash
+php artisan serve
+```
+
+Votre application est maintenant accessible à l'adresse `http://127.0.0.1:8000`.
+
+---
+
+## Utilisation
+
+1.  **Créez un compte** en cliquant sur le bouton "Inscription".
+2.  **Connectez-vous** à votre nouveau compte.
+3.  **Accédez à la section "Sondages"** via le menu de navigation.
+4.  **Créez un nouveau sondage** en remplissant le formulaire.
+5.  **Partagez le lien** du sondage avec d'autres utilisateurs pour qu'ils puissent voter.
+6.  **Consultez la section "Posts"** pour lire les articles ou en écrire un nouveau.
+
+Profitez de l'application !

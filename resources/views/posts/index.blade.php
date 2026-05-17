@@ -3,8 +3,8 @@
         Tous les articles
     </x-slot>
 
-    <div class="flex justify-between items-center mb-12">
-        <h1 class="text-5xl font-black text-black uppercase leading-none tracking-tighter">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+        <h1 class="text-4xl md:text-5xl font-black text-black uppercase leading-none tracking-tighter text-center md:text-left">
             Tous les Articles
         </h1>
         @can('create', App\Models\Post::class)

@@ -4,15 +4,15 @@
     </x-slot>
 
     <div class="text-center mb-12">
-        <h1 class="text-6xl font-black text-black uppercase leading-none tracking-tighter">
+        <h1 class="text-4xl md:text-6xl font-black text-black uppercase leading-none tracking-tighter">
             Le Blog de la Communauté
         </h1>
-        <p class="mt-4 text-xl font-bold text-black/70">
+        <p class="mt-4 text-lg md:text-xl font-bold text-black/70">
             Partagez vos idées, découvrez de nouvelles perspectives.
         </p>
     </div>
 
-    <h2 class="text-center text-3xl font-black text-black uppercase mb-8">
+    <h2 class="text-center text-2xl md:text-3xl font-black text-black uppercase mb-8">
         Derniers Articles
     </h2>
 

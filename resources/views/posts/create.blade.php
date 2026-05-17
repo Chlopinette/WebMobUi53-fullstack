@@ -3,9 +3,9 @@
         Écrire un nouvel article
     </x-slot>
 
-    <div class="bg-white border-4 border-black p-8">
+    <div class="bg-white border-4 border-black p-4 md:p-8">
         <header class="mb-8 text-center">
-            <h1 class="text-4xl font-black uppercase">
+            <h1 class="text-3xl md:text-4xl font-black uppercase">
                 Nouvel Article
             </h1>
             <p class="mt-2 text-black/70 font-bold">
@@ -40,13 +40,13 @@
                 @enderror
             </div>
 
-            <footer class="flex items-center justify-end gap-4">
+            <footer class="flex flex-col md:flex-row items-center justify-end gap-4">
                 <a href="{{ url('/posts') }}"
-                    class="px-6 py-3 bg-gray-200 text-black font-black uppercase border-4 border-black">
+                    class="w-full md:w-auto px-6 py-3 bg-gray-200 text-black font-black uppercase border-4 border-black text-center">
                     Annuler
                 </a>
                 <button type="submit"
-                    class="px-6 py-3 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
+                    class="w-full md:w-auto px-6 py-3 bg-pink-400 text-black font-black uppercase border-4 border-black shadow-[4px_4px_0px_black] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
                     Publier l'article
                 </button>
             </footer>

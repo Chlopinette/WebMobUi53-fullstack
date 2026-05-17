@@ -4,9 +4,9 @@
     </x-slot>
 
     <article class="bg-white border-4 border-black">
-        <header class="p-8 border-b-4 border-black">
+        <header class="p-4 md:p-8 border-b-4 border-black">
             @if ($post->title)
-                <h1 class="text-5xl font-black uppercase leading-tight tracking-tight mb-4">
+                <h1 class="text-3xl md:text-5xl font-black uppercase leading-tight tracking-tight mb-4">
                     {{ $post->title }}
                 </h1>
             @endif
@@ -36,11 +36,11 @@
             </div>
         </header>
 
-        <div class="p-8 text-lg prose prose-lg max-w-none prose-p:font-serif prose-p:text-black/80 prose-headings:font-black prose-headings:uppercase">
+        <div class="p-4 md:p-8 text-lg prose prose-lg max-w-none prose-p:font-serif prose-p:text-black/80 prose-headings:font-black prose-headings:uppercase">
             {!! nl2br(e($post->content)) !!}
         </div>
 
-        <footer class="p-8 border-t-4 border-black bg-yellow-300">
+        <footer class="p-4 md:p-8 border-t-4 border-black bg-yellow-300">
             @auth
                 <div class="mb-6">
                     <h3 class="text-xl font-black uppercase mb-3">Votre réaction</h3>

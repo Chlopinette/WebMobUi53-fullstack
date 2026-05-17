@@ -196,8 +196,8 @@
             </div>
 
             <div class="border-4 border-black p-4 bg-gray-50">
-              <h4 class="text-sm font-black uppercase text-black mb-3">Vue graphique</h4>
-              <canvas ref="chartCanvas"></canvas>
+                <h4 class="text-sm font-black uppercase text-black mb-3">Vue graphique</h4>
+                <canvas ref="chartCanvas"></canvas>
             </div>
           </div>
 
@@ -380,27 +380,21 @@ function copyToClipboard(text) {
   });
 }
 
-usePolling(async () => {
-  if (!poll.value || poll.value.is_draft) return;
-  try {
-    const data = await fetchApi({ url: `/polls/${token}` });
-    poll.value = data;
-  } catch {}
-}, 5000);
+// Start polling when the component is mounted
+usePolling(fetchPoll, 5000, true);
 
 watch(
-  () => poll.value?.options,
-  async () => {
-    if (showResults.value) {
+  () => poll.value,
+  async (newPoll) => {
+    if (newPoll && showResults.value) {
       await nextTick();
       updateChart();
     }
   },
-  { deep: true }
+  { deep: true, immediate: true }
 );
 
 onMounted(async () => {
-  await fetchPoll();
   try {
     const response = await fetch('/api/user', {
       headers: {
