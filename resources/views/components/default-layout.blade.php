@@ -36,17 +36,22 @@
                 </div>
 
                 @auth
-                    <a href="{{ url('/my-profile') }}" class="block hover:opacity-80 transition">
-                        <div
-                            class="h-8 w-8 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                            @if (Auth::user()->profile_picture)
-                                <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}"
-                                    alt="{{ Auth::user()->username }}" class="w-full h-full object-cover">
-                            @else
-                                <img src="/icons/profile.svg" alt="{{ Auth::user()->username }}" class="h-8 w-8">
-                            @endif
-                        </div>
-                    </a>
+                    <div class="flex items-center gap-4">
+                        <a href="{{ route('polls.dashboard') }}" class="block hover:opacity-80 transition">
+                            Polls
+                        </a>
+                        <a href="{{ url('/my-profile') }}" class="block hover:opacity-80 transition">
+                            <div
+                                class="h-8 w-8 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                                @if (Auth::user()->profile_picture)
+                                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}"
+                                        alt="{{ Auth::user()->username }}" class="w-full h-full object-cover">
+                                @else
+                                    <img src="/icons/profile.svg" alt="{{ Auth::user()->username }}" class="h-8 w-8">
+                                @endif
+                            </div>
+                        </a>
+                    </div>
                 @else
                     <div class="flex items-center gap-2">
                         <a href="{{ url('/auth/login') }}"

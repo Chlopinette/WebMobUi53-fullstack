@@ -20,6 +20,10 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/p/{token}', function () {
+    return view('polls.vote');
+})->name('polls.vote');
+
 Route::get('/@{username}', [ProfileController::class, 'show'])->where('username', '[A-Za-z0-9-_]+');
 
 Route::resource('posts', PostController::class)->only(['index', 'show']);
